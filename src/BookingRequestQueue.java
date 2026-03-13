@@ -10,15 +10,23 @@ public class BookingRequestQueue {
     }
 
     public void addRequest(Reservation reservation) {
-        requestQueue.add(reservation);
+        requestQueue.offer(reservation);
         System.out.println("Booking request added for " + reservation.getGuestName());
     }
 
-    public void displayRequests() {
-        System.out.println("\nBooking Request Queue (First-Come-First-Served):\n");
+    public Reservation getNextRequest() {
+        return requestQueue.poll();
+    }
+
+    public boolean isEmpty() {
+        return requestQueue.isEmpty();
+    }
+
+    public void displayQueue() {
+        System.out.println("\nCurrent Booking Request Queue:");
 
         for (Reservation r : requestQueue) {
-            r.displayReservation();
+            System.out.println(r.getGuestName() + " requested " + r.getRoomType());
         }
     }
 }
